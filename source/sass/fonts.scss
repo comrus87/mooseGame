@@ -1,0 +1,40 @@
+@font-face {
+  font-weight: 400;
+  font-family: "Consolas";
+  font-style: normal;
+  font-display: swap;
+  src: url("../fonts/Consolas.woff2") format("woff2"), url("../fonts/Consolas.woff") format("woff");
+}
+
+@font-face {
+  font-weight: 700;
+  font-family: "Consolas";
+  font-style: normal;
+  font-display: swap;
+  src: url("../fonts/Consolas-Bold.woff2") format("woff2"), url("../fonts/Consolas-Bold.woff") format("woff");
+}
+
+
+@font-face {
+  font-weight: 400;
+  font-family: "SegoeUI";
+  font-style: normal;
+  font-display: swap;
+  src: url("../fonts/SegoeUI.woff2") format("woff2"), url("../fonts/SegoeUI.woff") format("woff");
+}
+
+@font-face {
+  font-weight: 500;
+  font-family: "SegoeUI";
+  font-style: normal;
+  font-display: swap;
+  src: url("../fonts/SegoeUI-Italic.woff2") format("woff2"), url("../fonts/SegoeUI-Italic.woff") format("woff");
+}
+
+@font-face {
+  font-weight: 400;
+  font-family: "Merriweather";
+  font-style: normal;
+  font-display: swap;
+  src: url("../fonts/Merriweather-Regular.woff2") format("woff2"), url("../fonts/Merriweather-Regular.woff") format("woff");
+}
