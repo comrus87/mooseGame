@@ -1,1 +1,1 @@
-# Тестовое задание в IBrush
+# Project Moose game
