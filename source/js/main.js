@@ -5,6 +5,8 @@ const RANGE_VALUE = 550;
 const MAX_BOUND_COFFEE = 640;
 const STEP_MOVE = 20;
 const TIME_GAME = 20; // в секундах
+const GAME_SPEED = 2.7;
+const GAME_LIVES = 5;
 const btnStart = document.querySelector('.game__btn-start');
 const btnReset = document.querySelector('.game__btn-reset');
 const coffeeList = document.querySelector('.game__coffe-list');
@@ -18,9 +20,9 @@ const modal = document.querySelector('.game__modal');
 const game = {
   isPlay: false,
   level: 0,
-  lives: 5,
+  lives: GAME_LIVES,
   counts: 0,
-  speed: 2.7,
+  speed: GAME_SPEED,
 
   addCount() {
     this.counts++;
@@ -172,9 +174,9 @@ function gameOver() {
 function onResetClick() {
   modal.style.display = `none`;
   game.level = 0;
-  game.lives = 5;
+  game.lives = GAME_LIVES;
   game.counts = 0;
-  game.speed = 2.7;
+  game.speed = GAME_SPEED;
   level.textContent = game.level;
   lives.textContent = game.lives;
   counts.textContent = game.counts;
