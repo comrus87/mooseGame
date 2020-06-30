@@ -4,7 +4,7 @@ const RIGHT_KEYCODE = 39;
 const RANGE_VALUE = 550;
 const MAX_BOUND_COFFEE = 640;
 const STEP_MOVE = 20;
-const TIME_GAME = 10; // в секундах
+const TIME_GAME = 20; // в секундах
 const btnStart = document.querySelector('.game__btn-start');
 const btnReset = document.querySelector('.game__btn-reset');
 const coffeeList = document.querySelector('.game__coffe-list');
@@ -13,7 +13,6 @@ const progress = document.querySelector('.game__proogress');
 const counts = document.querySelector('.game__counts span');
 const lives = document.querySelector('.game__life span');
 const level = document.querySelector('.game__level span');
-
 const modal = document.querySelector('.game__modal');
 
 const game = {
@@ -21,6 +20,7 @@ const game = {
   level: 0,
   lives: 5,
   counts: 0,
+  speed: 2.7,
 
   addCount() {
     this.counts++;
@@ -39,6 +39,10 @@ const game = {
   nextLevel() {
     this.level++;
     level.textContent = this.level;
+  },
+
+  speedUp() {
+    this.speed -= 0.1;
   }
 };
 
@@ -47,7 +51,6 @@ function getRandomValue(min, max) {
 }
 
 // Логика создания и отрисовки падающих стаканов
-
 function createCoffee() {
   const coffeeElement = document.createElement('li');
   coffeeElement.innerHTML = `<img src="img/coffee.png" width="50" height="50">`;
@@ -68,7 +71,7 @@ function renderCoffee() {
 
   const tl = gsap.timeline();
 
-  tl.to(coffee, {y: 445, duration: 2.7, ease: `none`});
+  tl.to(coffee, {y: 445, duration: game.speed, ease: `none`});
   tl.then(()=> {
     if (isCollision(coffee, moose)) {
       tl.to(coffee, {duration: 0.2, ease: `none`, scale: 1.2});
@@ -80,7 +83,6 @@ function renderCoffee() {
 }
 
 // Обнаружение соприкосновения
-
 function isCollision(obj1, obj2) {
   const obj1X1 = Math.round(obj1.getBoundingClientRect().x);
   const obj1X2 = obj1X1 + Math.round(obj1.getBoundingClientRect().width);
@@ -94,9 +96,7 @@ function isCollision(obj1, obj2) {
   }
 }
 
-
 // Логика передвижения лося
-
 let currentX = STEP_MOVE;
 
 function addMooseMove(evt) {
@@ -120,9 +120,11 @@ function progressTimer(time) {
   const timerId = setInterval(() => {
     if (count > 100 || !game.isPlay) {
       clearInterval(timerId);
-      game.isPlay = false;
-      game.nextLevel.call(game);
-      // onStartPlayGame();
+      if (game.isPlay) {
+        game.nextLevel();
+        game.speedUp();
+        progressTimer(TIME_GAME);
+      }
     } else {
       progress.value = count;
       count++;
@@ -154,7 +156,6 @@ function onStartPlayGame() {
 }
 
 // Функция проигрыша
-
 function gameOver() {
   game.isPlay = false;
 
@@ -168,12 +169,12 @@ function gameOver() {
 }
 
 // Ообработчик новой игры
-
 function onResetClick() {
   modal.style.display = `none`;
   game.level = 0;
   game.lives = 5;
   game.counts = 0;
+  game.speed = 2.7;
   level.textContent = game.level;
   lives.textContent = game.lives;
   counts.textContent = game.counts;
